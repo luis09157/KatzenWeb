@@ -20,4 +20,4 @@ CREATE TABLE usuario (
 
 
 INSERT INTO usuario(nombreUsuario, contrasena, nombre,apellidoP,apellidoM, telefono, direccion, edad, email, fechaAlta, status) 
-VALUES ('Siul09157', '1', 'Luis Alfonso', 'Nino', 'Martinez', 8115886425, 'San Jose #349 Col Santa Fe Apodaca NL', 28, 'luisk2ify@gmail.com', 1);
+VALUES ('Siul09157', '1', 'Luis Alfonso', 'Nino', 'Martinez', 8115885, 'San Jose #349 Col Santa Fe Apodaca NL', 28, 'luisk2ify@gmail.com', NOW() , 1);
