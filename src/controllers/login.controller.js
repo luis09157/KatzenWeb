@@ -1,4 +1,4 @@
-import { pool } from "../db/db.js";
+//import { pool } from "../db/db.js";
 
 export const createEmployee = async (req, res) => {
     console.log(req.body);
@@ -6,6 +6,7 @@ export const createEmployee = async (req, res) => {
 };
 
 export const ping = async (req, res) => {
-    const [result] = await pool.query('select "Pong" as result');
-    res.json(result[0])
+    //const [result] = await pool.query('select "Pong" as result');
+    //res.json(result[0])
+    res.json("{}")
 }

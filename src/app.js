@@ -1,4 +1,6 @@
 import express from "express";
+import morgan from "morgan";
+
 const app = express();
 import http from "http";
 import { join } from "path";
@@ -12,6 +14,9 @@ const io = new Server(server);
 
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(morgan("dev"));
+app.use(express.json());
+
 
 // Routes
 import indexRoutes from "./routes/index.js";
