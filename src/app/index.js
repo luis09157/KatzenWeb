@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import {render} from 'react-dom';
+import React from 'react';
+import ReactDOM from "react-dom/client";
 
-class App extends Component {
-    render(){
-        return(
-            <h1>Hello world</h1>
-        )
-    }
-}
 
-render(<App/>,document.getElementById('app'));
+import App from "./aplication.js"
+
+
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(<App />);
