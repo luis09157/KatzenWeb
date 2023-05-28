@@ -26,18 +26,18 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
     try {
-        const { nombre,peso,sexo,especie,fechaNacimiento,color,img } = req.body;
+        const { nombreUsuario, contrasena, nombre, apellidoP, apellidoM, telefono, direccion, edad, email, idPerfil } = req.body;
 
-        if (nombre === undefined || peso === undefined 
-            || sexo === undefined || especie === undefined
-            || fechaNacimiento === undefined || color === undefined
-            || img === undefined) {
+        console.log(req.body)
+
+        if (nombreUsuario === undefined || contrasena === undefined 
+            || nombre === undefined ) {
             res.status(400).json({ message: "Bad Request. Please fill all field." });
         }   
 
-        const pet = { nombre, peso, sexo, especie, fechaNacimiento, color, img };
+        console.log("call sp_add_usuario('"+nombreUsuario+"','"+contrasena+"','"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+telefono+"','"+direccion+"',"+edad+",'"+email+"',"+idPerfil+");")
         const connection = await getConnection();
-        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.sexo +"','"+ pet.especie +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pet.img +"')");
+        await connection.query("call sp_add_usuario('"+nombreUsuario+"','"+contrasena+"','"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+telefono+"','"+direccion+"',"+edad+",'"+email+"',"+idPerfil+");");
         res.json({ message: "Pet added" });
     } catch (error) {
         res.status(500);
@@ -49,18 +49,15 @@ const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const { nombre,peso,sexo,especie,fechaNacimiento,color,img } = req.body;
+        const { telefono,direccion,edad } = req.body;
 
-        if (nombre === undefined || peso === undefined 
-            || sexo === undefined || especie === undefined
-            || fechaNacimiento === undefined || color === undefined
-            || img === undefined || id === undefined) {
+        if (telefono === undefined || direccion === undefined 
+            || edad === undefined || id === undefined) {
             res.status(400).json({ message: "Bad Request. Please fill all field." });
         }   
 
-        const pet = { nombre, peso, sexo, especie, fechaNacimiento, color, img };
         const connection = await getConnection();
-        const result = await connection.query("call sp_update_paciente("+ id +",'"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.sexo +"','"+ pet.especie +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pet.img +"')");
+        const result = await connection.query("call sp_update_usuario('"+telefono+"','"+direccion+"',"+edad+","+id+");");
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -72,7 +69,7 @@ const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
         const connection = await getConnection();
-        const result = await connection.query("call sp_delete_pet("+ id +");");
+        const result = await connection.query("call sp_delete_user("+ id +");");
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -85,6 +82,6 @@ export const methods = {
     getUser,
     addUser,
     updateUser,
-    getUser,
+    getUsers,
     deleteUser
 };

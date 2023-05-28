@@ -10,7 +10,7 @@ const router = Router();
 router.post("/api/user", userController.addUser);
 router.put("/api/user/:id", userController.updateUser);
 router.delete("/api/user/:id", userController.deleteUser);
-router.get("/api/user", userController.getUser);
+router.get("/api/user", userController.getUsers);
 router.get("/api/user/:id", userController.getUser);
 
 

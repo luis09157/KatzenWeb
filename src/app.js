@@ -22,11 +22,13 @@ app.use(express.json());
 import indexRoutes from "./routes/index.js";
 import loginRoutes from "./routes/login.routes.js";
 import petsRoutes from "./routes/pets.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 // routes
 app.use(indexRoutes)
 app.use(petsRoutes)
 app.use(loginRoutes)
+app.use(userRoutes)
 
 /*
 app.get('/', (req, res) => {
