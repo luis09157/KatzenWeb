@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 
 
-import App from "./aplication.js"
-
+import App from "./aplication.js"   
 
 const root = ReactDOM.createRoot(document.getElementById("app"));
+
 root.render(<App />);

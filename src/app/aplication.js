@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { NavComponent } from './Components/NavComponent.js';
+import { NewUserComponent}  from './Components/User/NewUserComponent.js';
+import NewPetComponent from './Components/Pet/NewPetComponent.js';
 
 class App extends Component {
-    render(){
+    render(){   
         return(
-            <h1>Hello world</h1>
+           <div>
+                 
+            <NavComponent />
+
+
+            <NewPetComponent />
+
+        
+           </div>
         )
     }
 }
