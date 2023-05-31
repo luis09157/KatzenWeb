@@ -4,12 +4,15 @@ import __dirname from '../dir.js'
 
 import { methods as petController } from "./../controllers/pet.controller.js";
 
-const router = Router();
+const router = Router();    
 
-router.get('/newPet', (req, res) => {
+router.get('/api/newPet', (req, res) => {
     res.render(join( __dirname + '/views/Register/newPet.ejs'));
 })
- 
+router.get('/api/navbar', (req, res) => {
+    res.render(join( __dirname + '/views/NavBar/nav.ejs'));
+})
+
 router.post("/api/pet", petController.addPet);
 router.put("/api/pet/:id", petController.updatePet);
 router.delete("/api/pet/:id", petController.deletePet);

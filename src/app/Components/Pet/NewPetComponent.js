@@ -3,6 +3,8 @@ import React, {useState} from 'react'
 
 const NewPetComponent = () => {
 
+    
+
 const [data, setData] = useState({
     paciente: '',
     cliente: ''
@@ -16,6 +18,30 @@ const handleInputChange = (e) => {
 const handleSubmitEvent = (e) => {
     e.preventDefault();
     console.log(data);
+    
+// let response = await fetch('/article/fetch/post/user', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=utf-8'
+//     },
+//     body: JSON.stringify(user)
+//   });
+  
+//   let result = await response.json();
+//   alert(result.message);
+}
+
+
+
+
+const getPets = () =>{
+    fetch('http://localhost:3000/api/user')
+    .then(response => {
+        return response.json();
+    })
+    .then(response => {
+        console.log(response)
+    })
 }
 
   return (
