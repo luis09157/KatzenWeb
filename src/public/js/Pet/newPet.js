@@ -1,5 +1,8 @@
 $( document ).ready(function() {
     getListPets();
+    getSexo();
+    getEspecie();
+   
 
 
     $('#formPet').on('submit', function(e) {
@@ -7,6 +10,13 @@ $( document ).ready(function() {
         var dataForm = convertFormToJSON($(this));        
         addPet(dataForm);
     });
+
+    
+    $( "#especiePet" ).on( "change", function() {
+        getRaza($(this).val());
+    } );
+
+
 });
 
 function convertFormToJSON(form) {
@@ -17,6 +27,47 @@ function convertFormToJSON(form) {
         return json;
       }, {});
   }
+
+function getSexo(){
+    $.get( "/api/spinner/sexo", function( data ) {
+
+    for(var i = 0 ; i < data[0].length; i++){
+      $("#sexoPet").append("<option value='"+ data[0][i].idSexo +"'>"+ data[0][i].sexo +"</option>");
+    }
+    $('#sexoPet').selectpicker('refresh');
+  });
+}
+
+function getEspecie(){
+  $.get( "/api/spinner/especie", function( data ) {
+
+    for(var i = 0 ; i < data[0].length; i++){
+      $("#especiePet").append("<option value='"+ data[0][i].idEspecie +"'>"+ data[0][i].especie +"</option>");
+    }
+    $('#especiePet').selectpicker('refresh');
+  });
+}
+
+
+function getRaza(v_idEspecie){
+
+    $.ajax({
+      url: '/api/spinner/raza', // url where to submit the request
+      type : "POST", // type of action POST || GET
+      dataType : 'json', // data type
+      data : {
+        "idEspecie" : v_idEspecie
+      } , // post data || get data
+      success : function(result) {
+          // you can see the result from the console
+          // tab of the developer tools
+          console.log(result);
+      },
+      error: function(xhr, resp, text) {
+          console.log(xhr, resp, text);
+      }
+  })
+}
 
 function addPet(dataForm){
 

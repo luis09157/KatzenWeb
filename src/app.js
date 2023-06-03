@@ -25,12 +25,14 @@ import indexRoutes from "./routes/index.js";
 import loginRoutes from "./routes/login.routes.js";
 import petsRoutes from "./routes/pets.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import spinnerRoutes from "./routes/spiners.routes.js";
 
 // routes
 app.use(indexRoutes)
 app.use(petsRoutes)
 app.use(loginRoutes)
 app.use(userRoutes)
+app.use(spinnerRoutes)
 
 /*
 app.get('/', (req, res) => {
