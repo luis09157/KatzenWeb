@@ -26,6 +26,7 @@ const getPets = async (req, res) => {
 
 const addPet = async (req, res) => {
     try {
+        console.log(req.body);
         const { nombre,peso,sexo,especie,fechaNacimiento,color,img } = req.body;
 
         if (nombre === undefined || peso === undefined 

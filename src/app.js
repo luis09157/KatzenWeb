@@ -12,10 +12,12 @@ const io = new Server(server);
 
 
 
+
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded());
 
 
 // Routes
