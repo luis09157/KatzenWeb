@@ -6,7 +6,8 @@ import { methods as userController } from "./../controllers/user.controller.js";
 
 const router = Router();
 
- 
+
+
 router.post("/api/user", userController.addUser);
 router.put("/api/user/:id", userController.updateUser);
 router.delete("/api/user/:id", userController.deleteUser);

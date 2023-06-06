@@ -23,6 +23,17 @@ const getEspecie = async (req, res) => {
     }
 };
 
+const getCliente = async (req, res) => {
+    try {
+        const connection = await getConnection();
+        const result = await connection.query("call sp_get_clientes();");
+        res.json(result);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
 const getRaza = async (req, res) => {
     try {
         console.log(req.body);
@@ -50,5 +61,6 @@ const getRaza = async (req, res) => {
 export const methods = {
     getSexo,
     getEspecie,
-    getRaza
+    getRaza,
+    getCliente
 };

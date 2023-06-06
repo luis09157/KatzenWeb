@@ -1,6 +1,6 @@
 import  getConnection  from "./../db/db.js";
 
-const getUser = async (req, res) => {
+const getClient = async (req, res) => {
     try {
         const { id } = req.params;
         const connection = await getConnection();
@@ -13,38 +13,41 @@ const getUser = async (req, res) => {
 };
 
 
-const getUsers = async (req, res) => {
+const getClients = async (req, res) => {
     try {
         const connection = await getConnection();
-        const result = await connection.query("call sp_get_usuarios();");
-        res.json(result);
+        const result = await connection.query("call sp_get_clientes();");
+        var data = {data : result[0]};
+        res.json(data);
     } catch (error) {
         res.status(500);
         res.send(error.message);
     }
 };
 
-const addUser = async (req, res) => {
+const addClient = async (req, res) => {
     try {
-        const { nombreUsuario, contrasena, nombre, apellidoP, apellidoM, telefono, direccion, edad, email, idPerfil } = req.body;
+        const { nombre, apellidoP, apellidoM, telefono, direccion, edad, email } = req.body;
 
         console.log(req.body)
 
-        if (nombreUsuario === undefined || contrasena === undefined 
-            || nombre === undefined ) {
+        if (nombre === undefined || apellidoP === undefined
+            || apellidoM === undefined || telefono === undefined
+            || direccion === undefined || edad === undefined
+            || email === undefined) {
             res.status(400).json({ message: "Bad Request. Please fill all field." });
         }   
 
         const connection = await getConnection();
-        await connection.query("call sp_add_usuario('"+nombreUsuario+"','"+contrasena+"','"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+telefono+"','"+direccion+"',"+edad+",'"+email+"',"+idPerfil+");");
-        res.json({ message: "Pet added" });
+        await connection.query("call sp_add_client('"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+telefono+"','"+direccion+"',"+edad+",'"+email+"');");
+        res.json({ message: "Client added" });
     } catch (error) {
         res.status(500);
         res.send(error.message);
     }
 };
 
-const updateUser = async (req, res) => {
+const updateClient = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -64,7 +67,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
+const deleteClient = async (req, res) => {
     try {
         const { id } = req.params;
         const connection = await getConnection();
@@ -78,9 +81,9 @@ const deleteUser = async (req, res) => {
 
 
 export const methods = {
-    getUser,
-    addUser,
-    updateUser,
-    getUsers,
-    deleteUser
+    getClient,
+    addClient,
+    updateClient,
+    getClients,
+    deleteClient
 };

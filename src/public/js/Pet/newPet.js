@@ -2,6 +2,7 @@ $( document ).ready(function() {
     getListPets();
     getSexo();
     getEspecie();
+    getCliente();
    
 
 
@@ -49,6 +50,17 @@ function getEspecie(){
 }
 
 
+function getCliente(){
+  $.get( "/api/spinner/cliente", function( data ) {
+
+    for(var i = 0 ; i < data[0].length; i++){
+      $("#clientePet").append("<option value='"+ data[0][i].idCliente +"'>"+ data[0][i].cliente +"</option>");
+    }
+    $('#clientePet').selectpicker('refresh');
+  });
+}
+
+
 function getRaza(v_idEspecie){
 
     $.ajax({
@@ -58,10 +70,14 @@ function getRaza(v_idEspecie){
       data : {
         "idEspecie" : v_idEspecie
       } , // post data || get data
-      success : function(result) {
-          // you can see the result from the console
-          // tab of the developer tools
-          console.log(result);
+      success : function(data) {
+
+        console.log(data);
+
+        for(var i = 0 ; i < data[0].length; i++){
+          $("#razaPet").append("<option value='"+ data[0][i].idRaza +"'>"+ data[0][i].raza +"</option>");
+        }
+        $('#razaPet').selectpicker('refresh');
       },
       error: function(xhr, resp, text) {
           console.log(xhr, resp, text);
@@ -70,17 +86,15 @@ function getRaza(v_idEspecie){
 }
 
 function addPet(dataForm){
-
-
     $.ajax({
-        url: '/api/pet', // url where to submit the request
-        type : "POST", // type of action POST || GET
-        dataType : 'json', // data type
-        data : dataForm , // post data || get data
+        url: '/api/pet',
+        type : "POST", 
+        dataType : 'json', 
+        data : dataForm , 
         success : function(result) {
-            // you can see the result from the console
-            // tab of the developer tools
             console.log(result);
+            getListPets();
+            resetAddPet();
         },
         error: function(xhr, resp, text) {
             console.log(xhr, resp, text);
@@ -89,20 +103,37 @@ function addPet(dataForm){
 }
 
 function getListPets(){
+  $('#listPets').DataTable( {
+    ajax: "/api/pet",
+    columns: [
+        { data: 'idPaciente' },
+        { data: 'nombre' },
+        { data: 'peso' },
+        { data: 'sexo' },
+        { data: 'especie' },
+        { data: 'raza' },
+        { data: 'fechaNacimiento' },
+        { data: 'color' },
+        { data: 'img' },
+        { data: 'cliente' }
+    ]
+} );
+}
 
-  $.get( "/api/pet", function( data ) {
 
-    for(var i = 0 ; i < data[0].length; i++){
-
-        $("#listPets").append("<tr>"+
-                                  "<th scope='row'>"+ data[0][i].idPaciente +"</th>"+
-                                  "<td>"+ data[0][i].nombre +"</td>"+
-                                  "<td>"+ data[0][i].peso +"</td>"+ 
-                                  "<td>"+ data[0][i].sexo +"</td>"+
-                                  "<td>"+ data[0][i].especie +"</td>"+
-                                  "<td>"+ data[0][i].fechaNacimiento +"</td>"+
-                                  "<td>"+ data[0][i].color +"</td>"+
-                                "</tr>");
-    }
-  });
+function resetAddPet(){
+  $("#cerrarModal").click();
+  $("#nombrePet").val("");
+  $("#pesoPet").val("");
+  $("#colorPet").val("");
+  $("#imgPet").val("");
+  $("#sexoPet").val("-1");
+  $('#sexoPet').selectpicker('refresh');
+  $("#especiePet").val("-1");
+  $('#especiePet').selectpicker('refresh');
+  $("#razaPet").val("-1");
+  $('#razaPet').selectpicker('refresh');
+  $("#clientePet").val("-1");
+  $('#clientePet').selectpicker('refresh');
+  $("#fechaNacimientoPet").val("");
 }

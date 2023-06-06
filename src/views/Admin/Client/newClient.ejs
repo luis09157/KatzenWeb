@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    
+    <header>
+      <%- include('../../Navbar/nav.ejs'); %>
+    </header>
+
+    <title>Registro Paciente</title>
+  </head>
+  <body>
+    
+   
+
+
+<div class="container">
+
+  <br>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Nuevo Cliente
+  </button>
+  <br><br>
+  <!--TABLA-->
+
+  <table id="listClients" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Cliente</th>
+        <th>Telefono</th>
+        <th>Direccion</th>
+        <th>Email</th>
+        <th>Edad</th>
+        <th>Fecha Alta</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>idCliente</th>
+        <th>cliente</th>
+        <th>telefono</th>
+        <th>direccion</th>
+        <th>email</th>
+        <th>edad</th>
+        <th>fechaAlta</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!--TABLA-->
+</div>
+    
+
+    
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Registro Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form id="formClient">
+
+                  <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="nombre" id="nombre" placeholder="Nombre..." required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Apellido Parterno</label>
+                    <input type="text" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="apellidoP" id="apellidoP" placeholder="Apellido Paterno..." required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Apellido Materno</label>
+                    <input type="text" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="apellidoM" id="apellidoM" placeholder="Apellido Materno..." required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Telefono</label>
+                    <input type="number" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="telefono" id="telefono" placeholder="Telefono..." required>
+                  </div>
+        
+
+                  <div class="mb-3">
+                    <label  class="form-label">Direccion</label>
+                    <textarea class="form-control" id="direccion" name="direccion" rows="3" placeholder="Zinc #318 Col. Los Cristales, Guadalupe NL." required></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Edad</label>
+                    <input type="number" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="edad" id="edad" placeholder="Edad..." required>
+                  </div>
+                
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="email" id="email" placeholder="Email..." required>
+                  </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cerrarModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    <script src="/js/Client/newClient.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+ 
+  </body>
+</html>
