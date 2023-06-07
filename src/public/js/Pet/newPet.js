@@ -93,6 +93,7 @@ function addPet(dataForm){
         data : dataForm , 
         success : function(result) {
             console.log(result);
+            $("#listPets").dataTable().fnDestroy();
             getListPets();
             resetAddPet();
         },

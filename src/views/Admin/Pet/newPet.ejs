@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     
     <header>
-      <%- include('../Navbar/nav.ejs'); %>
+      <%- include('../../Navbar/nav.ejs'); %>
     </header>
 
     <title>Registro Paciente</title>
@@ -45,6 +45,8 @@
         <th>Color</th>
         <th>IMG</th>
         <th>Cliente</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
       </tr>
     </thead>
     <tfoot>
@@ -67,11 +69,7 @@
 </div>
     
 
-    
 
-
-
-  
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -85,7 +83,7 @@
                 <form id="formPet">
                   <div class="mb-3">
                     <label class="form-label">Nombre</label>
-                    <input type="text" style="text-transform:uppercase;" class="form-control" value="ejemplo" name="nombre" id="nombrePet" placeholder="Nombre Mascota..." required>
+                    <input type="text" style="text-transform:uppercase;" class="form-control"  name="nombre" id="nombrePet" placeholder="Nombre Mascota..." required>
                   </div>
         
 
@@ -111,9 +109,6 @@
                       </select> 
                     </div>
                   </div>  
-
-
-                  
                   
                   <div class="mb-3">
                     <div class="row">
@@ -128,19 +123,14 @@
                     
                   </div>
         
-                 <!-- <div class="mb-3">
-                    <label class="form-label">Edad</label>
-                    <input type="number" class="form-control" name="edad" value="1" id="edadPet" placeholder="Edad..." required>
-                  </div>-->
-        
                   <div class="mb-3">
                     <label class="form-label">Peso</label>
-                    <input type="number" class="form-control" name="peso" value="20" id="pesoPet" placeholder="Peso Mascota..." required>
+                    <input type="number" class="form-control" name="peso"  id="pesoPet" placeholder="Peso Mascota..." required>
                   </div>
 
                   <div class="mb-3">
                     <label class="form-label">Color</label>
-                    <input type="text" style="text-transform:uppercase;" class="form-control" name="color" value="negro como tu alma" id="colorPet" placeholder="Color Mascota..." required>
+                    <input type="text" style="text-transform:uppercase;" class="form-control" name="color"  id="colorPet" placeholder="Color Mascota..." required>
                   </div>
 
                   <div class="mb-3">
@@ -158,29 +148,18 @@
 
                   <div class="mb-3">
                     <label class="form-label">Img</label>
-                    <input type="text" class="form-control" name="img" value="img" id="imgPet" placeholder="Imagen..." required>
+                    <input type="text" class="form-control" name="img"  id="imgPet" placeholder="Imagen..." required>
                   </div>
 
                   <div class="mb-3">
                     <label class="form-label">Fecha Nacimiento</label>
-                    <input type="text" class="form-control" name="fechaNacimiento" id="fechaNacimientoPet" value="20/05/23" placeholder="Fecha Nacimiento..." required>
+=
+
+                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimientoPet" placeholder="Fecha Nacimiento..." required>
                   </div>
+
+
         
-                 <!-- <div class="mb-3">
-                    <label class="form-label">Nombre Propietario</label>
-                    <input type="text" class="form-control" name="cliente" id="clientePet" placeholder="Nombre Propietario..." required>
-                  </div>
-        
-                  <div class="mb-3">
-                    <label class="form-label">Telefono</label>
-                    <input type="number" name="telefono" maxlength="10" class="form-control" id="telefonoPet" placeholder="Telefono..." required>
-                  </div>
-        
-                  <div class="mb-3">
-                    <label  class="form-label">Direccion</label>
-                    <textarea class="form-control" id="direccionPet" name="direccion" rows="3" placeholder="Zinc #318 Col. Los Cristales, Guadalupe NL." required></textarea>
-                  </div>-->
-                
                 
             </div>
         </div>
@@ -192,8 +171,6 @@
       </div>
     </div>
   </div>
-  
-
  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -204,8 +181,8 @@
     
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-    <script src="/js/Pet/newPet.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
- 
+    <script src="/js/Pet/newPet.js"> </script>
+
   </body>
 </html>

@@ -7,7 +7,7 @@ import { methods as petController } from "./../controllers/pet.controller.js";
 const router = Router();    
 
 router.get('/api/newPet', (req, res) => {
-    res.render(join( __dirname + '/views/Register/newPet.ejs'));
+    res.render(join( __dirname + '/views/Admin/Pet/newPet.ejs'));
 })
 router.get('/api/navbar', (req, res) => {
     res.render(join( __dirname + '/views/NavBar/nav.ejs'));
