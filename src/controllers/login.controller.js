@@ -9,10 +9,10 @@ const login = async (req, res) => {
             res.status(400).json({ message: "Bad Request. Please fill all field." });
         }   
 
-       // const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, img, idCliente };
-       // const connection = await getConnection();
-       //s await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pet.img +"','"+ pet.idCliente +"')");
-        res.json({ message: "Login" });
+        const connection = await getConnection();
+        const result = await connection.query("call sp_Login('"+ username +"','"+ password +"')");
+        var data = {data : result[0]};
+        res.json(data);
     } catch (error) {
         res.status(500);
         res.send(error.message);
