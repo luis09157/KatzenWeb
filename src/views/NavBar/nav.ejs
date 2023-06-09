@@ -1,3 +1,14 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+  $( document ).ready(function() {
+    isEmptyLogin(); 
+  });
+  function isEmptyLogin(){
+      if(localStorage.getItem('isLogin') == null || localStorage.getItem('isLogin') == false ){
+          window.location.replace("/api/login");
+      }
+    }
+</script>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="/api/home">Katzen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

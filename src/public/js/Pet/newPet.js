@@ -20,6 +20,7 @@ $( document ).ready(function() {
 
 });
 
+
 function convertFormToJSON(form) {
     return $(form)
       .serializeArray()
