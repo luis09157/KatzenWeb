@@ -9,6 +9,9 @@ const router = Router();
 router.get('/api/newPet', (req, res) => {
     res.render(join( __dirname + '/views/Admin/Pet/newPet.ejs'));
 })
+router.get('/api/detailPet/:id', (req, res) => {
+    res.render(join( __dirname + '/views/Admin/Pet/detailPet.ejs'));
+})
 router.get('/api/navbar', (req, res) => {
     res.render(join( __dirname + '/views/NavBar/nav.ejs'));
 })
