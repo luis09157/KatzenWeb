@@ -30,14 +30,7 @@ const addClient = async (req, res) => {
         const { nombre, apellidoP, apellidoM, telefono, direccion, edad, email } = req.body;
 
         console.log(req.body)
-
-        if (nombre === undefined || apellidoP === undefined
-            || apellidoM === undefined || telefono === undefined
-            || direccion === undefined || edad === undefined
-            || email === undefined) {
-            res.status(400).json({ message: "Bad Request. Please fill all field." });
-        }   
-
+        
         const connection = await getConnection();
         await connection.query("call sp_add_client('"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+telefono+"','"+direccion+"',"+edad+",'"+email+"');");
         res.json({ message: "Client added" });

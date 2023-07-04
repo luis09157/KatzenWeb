@@ -1,24 +1,78 @@
+var table = null;
+var fileData;
+var myFile;
+
+
 $( document ).ready(function() {
+  $("#btn_error").hide();
     getListPets();
     getSexo();
     getEspecie();
     getCliente();
    
 
+    $('#customFile2').change(function(){
+      document.getElementById('imgAvatar').src = window.URL.createObjectURL(this.files[0])
+      var filereader = new FileReader();
+      filereader.onload = function(event){
+         fileData  = event.target.result;
+      };
+      myFile = $('#customFile2').prop('files')[0];  
+      console.log('myfile',myFile)
+     filereader.readAsDataURL(myFile)
+  });
 
     $('#formPet').on('submit', function(e) {
         e.preventDefault();
-        var dataForm = convertFormToJSON($(this));        
-        addPet(dataForm);
+        
+
+        if(myFile == null || myFile != undefined){
+          myFile = {
+            name : ""
+          }
+        }
+        var dataForm = convertFormToJSON($(this));  
+        if(validateForm(dataForm)){
+          console.log("entramo a a;adir perros");
+          addPet(dataForm);
+        }
+      
+       
     });
 
+    function validateForm(dataForm){
+     if(dataForm.idSexo == "-1"){
+        $("#btn_error").click();
+        $("#txt_msgError").html("Selecciona una sexo.");
+        return false;
+      }else if(dataForm.idEspecie == "-1"){
+          $("#btn_error").click();
+          $("#txt_msgError").html("Selecciona una especie.");
+          return false;
+      }else if(dataForm.idRaza == "-1"){
+          $("#btn_error").click();
+          $("#txt_msgError").html("Selecciona una raza.");
+          return false;
+      }else if(dataForm.idCliente == "-1"){
+          $("#btn_error").click();
+          $("#txt_msgError").html("Selecciona un cliente.");
+          return false;
+      }
+
+      return true;
+    }
     
     $( "#especiePet" ).on( "change", function() {
         getRaza($(this).val());
     } );
 
+    $('#listPets tbody').on('click', 'tr', function () {
+      var idPet = table.row(this).data().idPaciente;
+      window.location.replace("/api/detailPet/" + idPet);
+    });
 
 });
+
 
 
 function convertFormToJSON(form) {
@@ -87,13 +141,32 @@ function getRaza(v_idEspecie){
 }
 
 function addPet(dataForm){
+  console.log(dataForm.idCliente)
     $.ajax({
         url: '/api/pet',
         type : "POST", 
         dataType : 'json', 
-        data : dataForm , 
+        data : {
+         'filename':myFile.name,
+          'file':fileData , 
+          'nombre': dataForm.nombre,
+          'peso' : dataForm.peso,
+          'idSexo' : dataForm.idSexo,
+          'idEspecie' : dataForm.idEspecie,
+          'idRaza' : dataForm.idRaza,
+          'fechaNacimiento' : dataForm.fechaNacimiento,
+          'color' : dataForm.color,
+          'sParticulares' : dataForm.sParticulares,
+          'idCliente': dataForm.idCliente
+          }  , 
         success : function(result) {
-            console.log(result);
+          console.log(result);
+          if(result.errors.length > 0){
+            $("#btn_error").click();
+            $("#txt_msgError").html(result.errors[0].msg);
+            return;
+          }
+           
             $("#listPets").dataTable().fnDestroy();
             getListPets();
             resetAddPet();
@@ -105,7 +178,7 @@ function addPet(dataForm){
 }
 
 function getListPets(){
-  $('#listPets').DataTable( {
+ table =  $('#listPets').DataTable( {
     ajax: "/api/pet",
     columns: [
         { data: 'idPaciente' },

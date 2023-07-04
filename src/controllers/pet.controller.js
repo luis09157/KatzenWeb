@@ -1,13 +1,20 @@
 import  getConnection  from "./../db/db.js";
+import fs from "fs";
+import __dirname from '../dir.js'
+import _pathTime from '../date.js'
+const pathImg = "/img/addPet/";
+import { validateCreate } from "../validators/VPets.js";
+import { error } from "console";
 
 const getPet = async (req, res) => {
     try {
         const { id } = req.params;
         const connection = await getConnection();
         const result = await connection.query("call sp_get_pet("+ id +");");
-        res.json(result);
+        var data = {data : result[0]};
+        res.json(data);
     } catch (error) {
-        res.status(500);
+        res.status(500);    
         res.send(error.message);
     }
 };
@@ -27,21 +34,28 @@ const getPets = async (req, res) => {
 
 const addPet = async (req, res) => {
     try {
-        console.log(req.body);
-        const { nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,img, idCliente } = req.body;
+        res.setHeader('Content-Type', 'application/json');
+        console.log(req.body)
+        const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares ,idCliente} = req.body;
 
-        if (nombre === undefined || peso === undefined 
-            || idSexo === undefined || idEspecie === undefined
-            || idRaza === undefined || idCliente === undefined
-            || fechaNacimiento === undefined || color === undefined
-            || img === undefined) {
-            res.status(400).json({ message: "Bad Request. Please fill all field." });
-        }   
+        if(filename != ""){
+            var pathServidor = pathImg + _pathTime + "." + req.body.filename.split('.')[1];
+            var path     = __dirname + "/public" + pathServidor;
+            var image    = req.body.file;
+            var data     = image.split(',')[1];
+            fs.writeFileSync(path,data,{encoding:'base64'});
+        }else{
+            pathServidor = "/img/carita-felipe.jpg";
+        }
+       
 
-        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, img, idCliente };
+        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, sParticulares, idCliente };
         const connection = await getConnection();
-        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pet.img +"','"+ pet.idCliente +"')");
-        res.json({ message: "Pet added" });
+        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"','"+ pet.idCliente +"')");
+        res.json({ 
+            message: "Pet added" ,
+            errors : {}
+        });
     } catch (error) {
         res.status(500);
         res.send(error.message);

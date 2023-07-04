@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import bodyParser from 'body-parser';
 
 const app = express();
 import http from "http";
@@ -17,7 +18,16 @@ app.set("views", join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(bodyParser.json({
+  limit: '20mb'
+}));
+
+app.use(bodyParser.urlencoded({
+  limit: '20mb',
+  parameterLimit: 100000,
+  extended: true 
+}));
+
 
 
 // Routes

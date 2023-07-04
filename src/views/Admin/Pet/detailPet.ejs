@@ -37,7 +37,7 @@
         <div class="row" >
             <div class="col">
                 <br><br>
-                <img src="/img/gato5.jpg" width="380" height="390" class="rounded float-start" alt="...">
+                <img src="/img/gato5.jpg" width="380" height="390" id="imgPet" class="rounded float-start" alt="...">
             </div>
             <div class="col">
                 <div class="row">
@@ -48,7 +48,7 @@
                         <p class="text-uppercase fw-bolder">Expendiente</p>
                     </div>
                     <div class="col-4">
-                        <p class="text-uppercase text-danger fw-bolder">202310011</p>
+                        <p id="txt_expediente" class="text-uppercase text-danger fw-bolder">202310011</p>
                     </div>
                 </div>
                 <br><br>
@@ -57,7 +57,7 @@
                         <p class="text-uppercase fw-bolder">Nombre Paciente</p>
                     </div>
                     <div class="col-8">
-                        <p class="text-uppercase ">Panchito Gatuno</p>
+                        <p id="txt_nombrePaciente" class="text-uppercase "></p>
                     </div>
                 </div>
                 <br>
@@ -66,7 +66,7 @@
                         <p class="text-uppercase fw-bolder">FECHA NACIMIENTO</p>
                     </div>
                     <div class="col-8">
-                        <p class="text-uppercase ">18 / Marzo / 23</p>
+                        <p id="txt_fechaNacimiento" class="text-uppercase "></p>
                     </div>
                 </div>
                 <br>
@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioMacho">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       MACHO
                                     </label>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioHembra">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                       HEMBRA
                                     </label>
@@ -102,7 +102,7 @@
                         <p class="text-uppercase fw-bolder">Especie</p>
                     </div>
                     <div class="col-8">
-                        <p class="text-uppercase ">FELINO</p>
+                        <p id="txt_especie" class="text-uppercase "></p>
                     </div>
                 </div>
                 <br>
@@ -111,7 +111,7 @@
                         <p class="text-uppercase fw-bolder">RAZA</p>
                     </div>
                     <div class="col-8">
-                        <p class="text-uppercase ">GATUNO</p>
+                        <p id="txt_raza" class="text-uppercase "></p>
                     </div>
                 </div>
                 <br>
@@ -120,7 +120,7 @@
                         <p class="text-uppercase fw-bolder">COLOR</p>
                     </div>
                     <div class="col-8">
-                        <p class="text-uppercase ">NEGRO</p>
+                        <p id="txt_color" class="text-uppercase "></p>
                     </div>
                 </div>
                 <br>
@@ -137,7 +137,7 @@
             <div class="row">
                 <div>
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="SEÑAS PARTICULARES" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="SEÑAS PARTICULARES" id="txt_señasParticulares" style="height: 100px" disabled></textarea>
                         <label for="floatingTextarea2">SEÑAS PARTICULARES</label>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-    <script src="/js/Client/newClient.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="/js/Pet/detailPet.js"> </script>
  
   </body>
 </html>

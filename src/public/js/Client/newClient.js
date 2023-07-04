@@ -21,7 +21,6 @@ function convertFormToJSON(form) {
 
 function addClient(dataForm){
 
-
     $.ajax({
         url: '/api/client',
         type : "POST", 
