@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    $("#btn_error").hide();
     getListClients();
 
     $('#formClient').on('submit', function(e) {
@@ -14,19 +15,27 @@ function convertFormToJSON(form) {
     return $(form)
       .serializeArray()
       .reduce(function (json, { name, value }) {
-        json[name] = value;
+          json[name] = value;
         return json;
       }, {});
   }
 
 function addClient(dataForm){
 
+  console.log(dataForm);
     $.ajax({
         url: '/api/client',
         type : "POST", 
         dataType : 'json',
         data : dataForm ,
         success : function(result) {
+
+            if(result.errors.length > 0){
+                $("#btn_error").click();
+                $("#txt_msgError").html(result.errors[0].msg);
+                return;
+              }
+
             $("#listClients").dataTable().fnDestroy();
             getListClients();
             resetAddClient();

@@ -35,7 +35,12 @@ const getPets = async (req, res) => {
 const addPet = async (req, res) => {
     try {
         res.setHeader('Content-Type', 'application/json');
-        console.log(req.body)
+
+        if(req.body.peso === null || req.body.peso ==="")
+            req.body.peso = 0;
+        if(req.body.sParticulares === null || req.body.sParticulares ==="")
+            req.body.sParticulares = "";
+
         const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares ,idCliente} = req.body;
 
         if(filename != ""){
@@ -50,6 +55,9 @@ const addPet = async (req, res) => {
        
 
         const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, sParticulares, idCliente };
+        
+        console.log(pet)
+
         const connection = await getConnection();
         await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"','"+ pet.idCliente +"')");
         res.json({ 

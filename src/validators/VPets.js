@@ -7,14 +7,14 @@ export const validateCreate = [
         .not()
         .isEmpty()
         .withMessage("Necesitas agregar un nombre."),
-    check('peso')
+    /*check('peso')
         .exists()
         .not()
         .isEmpty()
         .withMessage("Necesitas agregar un peso a la mascota."),
     check('peso')
         .isNumeric()
-        .withMessage("El valor de peso necesita ser numerico."),
+        .withMessage("El valor de peso necesita ser numerico."),*/
     check('idSexo')
         .exists()
         .not()
@@ -43,11 +43,11 @@ export const validateCreate = [
         .not()
         .isEmpty()
         .withMessage("Necesitas agregar un color para la mascota."),
-    check('sParticulares')
+   /* check('sParticulares')
         .exists()
         .not()
         .isEmpty()
-        .withMessage("Necesitas agregar las señas particulares de la mascota."),
+        .withMessage("Necesitas agregar las señas particulares de la mascota."),*/
     check('idCliente')
         .exists()
         .not()

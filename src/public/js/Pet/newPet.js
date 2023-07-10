@@ -1,6 +1,6 @@
 var table = null;
 var fileData;
-var myFile;
+var myFile = null;
 
 
 $( document ).ready(function() {
@@ -24,16 +24,14 @@ $( document ).ready(function() {
 
     $('#formPet').on('submit', function(e) {
         e.preventDefault();
-        
 
-        if(myFile == null || myFile != undefined){
-          myFile = {
-            name : ""
-          }
+        if(myFile == null ){
+            myFile = {
+              name : ""
+            }
         }
         var dataForm = convertFormToJSON($(this));  
         if(validateForm(dataForm)){
-          console.log("entramo a a;adir perros");
           addPet(dataForm);
         }
       
@@ -141,7 +139,6 @@ function getRaza(v_idEspecie){
 }
 
 function addPet(dataForm){
-  console.log(dataForm.idCliente)
     $.ajax({
         url: '/api/pet',
         type : "POST", 

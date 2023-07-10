@@ -1,10 +1,11 @@
 import  getConnection  from "./../db/db.js";
 
-const getClient = async (req, res) => {
+
+
+const getCamping = async (req, res) => {
     try {
-        const { id } = req.params;
         const connection = await getConnection();
-        const result = await connection.query("call sp_get_usuario("+ id +");");
+        const result = await connection.query("call sp_get_campaña();");
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -12,38 +13,22 @@ const getClient = async (req, res) => {
     }
 };
 
-
-const getClients = async (req, res) => {
+const addCamping = async (req, res) => {
     try {
-        const connection = await getConnection();
-        const result = await connection.query("call sp_get_clientes();");
-        var data = {data : result[0]};
-        res.json(data);
-    } catch (error) {
-        res.status(500);
-        res.send(error.message);
-    }
-};
+        const { nombre, fechaCamping } = req.body;
 
-const addClient = async (req, res) => {
-    try {
-        const { nombre, apellidoP, apellidoM, telefono, direccion, edad, email } = req.body;
-        
         console.log(req.body)
+
         const connection = await getConnection();
-        await connection.query("call sp_add_client('"+nombre+"','"+apellidoP+"','"+apellidoM+"',"+telefono+",'"+direccion+"',"+edad+",'"+email+"')");
-        
-        res.json({ 
-            message: "Client added" ,
-            errors : {}
-        });
+        await connection.query("call sp_add_campaña('"+nombre+"','"+fechaCamping+"');");
+        res.json({ message: "Camping added" });
     } catch (error) {
         res.status(500);
         res.send(error.message);
     }
 };
 
-const updateClient = async (req, res) => {
+const updateCamping = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -63,7 +48,7 @@ const updateClient = async (req, res) => {
     }
 };
 
-const deleteClient = async (req, res) => {
+const deleteCamping = async (req, res) => {
     try {
         const { id } = req.params;
         const connection = await getConnection();
@@ -77,9 +62,9 @@ const deleteClient = async (req, res) => {
 
 
 export const methods = {
-    getClient,
-    addClient,
-    updateClient,
-    getClients,
-    deleteClient
+    getCamping,
+    addCamping,
+    updateCamping,
+    getCamping,
+    deleteCamping
 };
