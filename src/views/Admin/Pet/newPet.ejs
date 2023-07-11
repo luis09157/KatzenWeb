@@ -156,9 +156,33 @@
                       </select>
                     </div>
                   </div>
+                  <div class="mb-3">
                     <p class="text-uppercase fw-bolder">Fecha Nacimiento</p>
                     <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimientoPet" placeholder="Fecha Nacimiento..." required>
                   </div>
+
+                  <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input radioPacienteCheck" type="radio" name="radioPaciente" id="radioPaciente" value="0" checked>
+                      <label class="form-check-label" for="inlineRadio1">PACIENTE</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input radioPacienteCheck" type="radio" name="radioPaciente" id="radioPacienteCampaña" value="1">
+                      <label class="form-check-label" for="inlineRadio2">PACIENTE CAMPAÑA</label>
+                    </div>
+                  </div>
+
+                  <div id="comboCampaña" class="mb-3">
+                    <div class="row">
+                      <p class="text-uppercase fw-bolder">CAMPAÑA</p>
+                    </div>
+                    <div class="row">
+                      <select class="selectpicker" data-live-search="true" id="campañaPet"  name="idCampaña" required>
+                        <option value="-1" selected>Seleccion Campaña...</option>
+                      </select>
+                    </div>
+                  </div>
+
 
                   <div class="mb-3">
                     <div class="row">
@@ -176,6 +200,7 @@
                     </div>  
                   </div>
 
+                 
 
             </div>
         </div>

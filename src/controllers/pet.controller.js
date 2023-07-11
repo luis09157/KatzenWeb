@@ -41,7 +41,8 @@ const addPet = async (req, res) => {
         if(req.body.sParticulares === null || req.body.sParticulares ==="")
             req.body.sParticulares = "";
 
-        const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares ,idCliente} = req.body;
+            console.log(req.body);
+        const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares, radioPaciente ,idCliente} = req.body;
 
         if(filename != ""){
             var pathServidor = pathImg + _pathTime + "." + req.body.filename.split('.')[1];
@@ -54,12 +55,14 @@ const addPet = async (req, res) => {
         }
        
 
-        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, sParticulares, idCliente };
+        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, radioPaciente, sParticulares, idCliente };
         
         console.log(pet)
 
         const connection = await getConnection();
-        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"','"+ pet.idCliente +"')");
+        console.log("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"',"+ Number(pet.radioPaciente)+",'"+ pet.idCliente +"')");
+        
+        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"',"+ Number(pet.radioPaciente)+",'"+ pet.idCliente +"')");
         res.json({ 
             message: "Pet added" ,
             errors : {}

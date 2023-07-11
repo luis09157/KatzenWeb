@@ -5,11 +5,20 @@ var myFile = null;
 
 $( document ).ready(function() {
   $("#btn_error").hide();
+  $("#comboCampaña").hide();
     getListPets();
     getSexo();
     getEspecie();
     getCliente();
+    getCampaña();
    
+    $('.radioPacienteCheck').click(function () {
+        if ($('#radioPacienteCampaña').is(':checked')) {
+          $("#comboCampaña").show();
+        }else{
+          $("#comboCampaña").hide();
+        }
+    });
 
     $('#customFile2').change(function(){
       document.getElementById('imgAvatar').src = window.URL.createObjectURL(this.files[0])
@@ -30,7 +39,7 @@ $( document ).ready(function() {
               name : ""
             }
         }
-        var dataForm = convertFormToJSON($(this));  
+        var dataForm = convertFormToJSON($(this)); 
         if(validateForm(dataForm)){
           addPet(dataForm);
         }
@@ -138,6 +147,23 @@ function getRaza(v_idEspecie){
   })
 }
 
+function getCampaña(){
+  $.ajax({
+    url: '/api/campingCombo', 
+    type : "GET",
+    dataType : 'json',
+    success : function(data) {
+      for(var i = 0 ; i < data.length; i++){
+        $("#campañaPet").append("<option value='"+ data[i].idCampaña +"'>"+ data[i].nombre +"</option>");
+      }
+      $('#campañaPet').selectpicker('refresh');
+    },
+    error: function(xhr, resp, text) {
+        console.log(xhr, resp, text);
+    }
+})
+}
+
 function addPet(dataForm){
     $.ajax({
         url: '/api/pet',
@@ -154,6 +180,7 @@ function addPet(dataForm){
           'fechaNacimiento' : dataForm.fechaNacimiento,
           'color' : dataForm.color,
           'sParticulares' : dataForm.sParticulares,
+          'radioPaciente' : dataForm.radioPaciente,
           'idCliente': dataForm.idCliente
           }  , 
         success : function(result) {

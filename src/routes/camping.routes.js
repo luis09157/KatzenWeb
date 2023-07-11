@@ -16,6 +16,7 @@ router.post("/api/camping", userController.addCamping);
 router.put("/api/camping/:id", userController.updateCamping);
 router.delete("/api/camping/:id", userController.deleteCamping);
 router.get("/api/camping", userController.getCamping);
+router.get("/api/campingCombo", userController.getCampingCombo);
 router.get("/api/camping/:id", userController.getCamping);
 
 

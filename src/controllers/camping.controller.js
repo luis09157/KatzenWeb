@@ -6,7 +6,20 @@ const getCamping = async (req, res) => {
     try {
         const connection = await getConnection();
         const result = await connection.query("call sp_get_campaña();");
-        res.json(result);
+        var data = {data : result[0]};
+        res.json(data);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+const getCampingCombo = async (req, res) => {
+    try {
+        const connection = await getConnection();
+        const result = await connection.query("call get_campaña_mes();");
+        var data = {data : result[0]};
+        res.json(result[0]);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -21,7 +34,10 @@ const addCamping = async (req, res) => {
 
         const connection = await getConnection();
         await connection.query("call sp_add_campaña('"+nombre+"','"+fechaCamping+"');");
-        res.json({ message: "Camping added" });
+        res.json({ 
+            message: "Camping added" ,
+            errors : {}
+        });
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -63,6 +79,7 @@ const deleteCamping = async (req, res) => {
 
 export const methods = {
     getCamping,
+    getCampingCombo,
     addCamping,
     updateCamping,
     getCamping,
