@@ -40,9 +40,11 @@ const addPet = async (req, res) => {
             req.body.peso = 0;
         if(req.body.sParticulares === null || req.body.sParticulares ==="")
             req.body.sParticulares = "";
+        if(req.body.idCampaña === null || req.body.idCampaña ==="")
+            req.body.idCampaña = 0;
 
             console.log(req.body);
-        const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares, radioPaciente ,idCliente} = req.body;
+        const{ filename, file , nombre,peso,idSexo,idEspecie,idRaza,fechaNacimiento,color,sParticulares, radioPaciente ,idCliente, idCampaña} = req.body;
 
         if(filename != ""){
             var pathServidor = pathImg + _pathTime + "." + req.body.filename.split('.')[1];
@@ -55,14 +57,12 @@ const addPet = async (req, res) => {
         }
        
 
-        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, radioPaciente, sParticulares, idCliente };
+        const pet = { nombre, peso, idSexo, idEspecie, idRaza, fechaNacimiento, color, radioPaciente, sParticulares, idCliente, idCampaña };
         
         console.log(pet)
 
         const connection = await getConnection();
-        console.log("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"',"+ Number(pet.radioPaciente)+",'"+ pet.idCliente +"')");
-        
-        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"',"+ Number(pet.radioPaciente)+",'"+ pet.idCliente +"')");
+        await connection.query("call sp_add_paciente('"+ pet.nombre +"', "+ pet.peso +" ,'"+ pet.idSexo +"','"+ pet.idEspecie +"','"+ pet.idRaza +"','"+ pet.fechaNacimiento +"','"+ pet.color +"','"+ pathServidor +"','"+ pet.sParticulares +"',"+ Number(pet.radioPaciente)+",'"+ pet.idCliente +"',"+ Number(pet.idCampaña)+")");
         res.json({ 
             message: "Pet added" ,
             errors : {}

@@ -165,6 +165,7 @@ function getCampaña(){
 }
 
 function addPet(dataForm){
+
     $.ajax({
         url: '/api/pet',
         type : "POST", 
@@ -181,7 +182,9 @@ function addPet(dataForm){
           'color' : dataForm.color,
           'sParticulares' : dataForm.sParticulares,
           'radioPaciente' : dataForm.radioPaciente,
-          'idCliente': dataForm.idCliente
+          'idCliente': dataForm.idCliente,
+          'idCampaña': dataForm.idCampaña
+
           }  , 
         success : function(result) {
           console.log(result);
