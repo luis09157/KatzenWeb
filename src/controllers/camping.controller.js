@@ -1,5 +1,32 @@
 import  getConnection  from "./../db/db.js";
+import pdf from 'html-pdf';
 
+
+const content = `
+<!doctype html>
+    <html>
+       <head>
+            <meta charset="utf-8">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+            <title>PDF Result Template</title>
+            <style>
+                h1 {
+                    color: green;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+              <div class="row">
+                <div class="col-4">icono</div>
+                <div class="col-4">titulo</div>
+                <div class="col-4">dibujo</div>
+              </div>
+            </div>
+        </body>
+    </html>
+`;
 
 
 const getCamping = async (req, res) => {
@@ -29,6 +56,15 @@ const getCampingCombo = async (req, res) => {
 const addCamping = async (req, res) => {
     try {
         const { nombre, fechaCamping } = req.body;
+
+
+        pdf.create(content).toFile('./html-pdf.pdf', function(err, res) {
+            if (err){
+                console.log(err);
+            } else {
+                console.log(res);
+            }
+        });
 
         console.log(req.body)
 
